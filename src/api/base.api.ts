@@ -1,19 +1,17 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { ModalName } from "../config/constants";
+import { ModelName } from "../config/constants";
 
-const instance =  axios.create({
-    headers: {
-        token: ''
-    },
-    baseURL: process.env.REACT_BASE_URL
-})
 
 class BaseApi {
-    instance = instance 
-    name = ''
+    instance =  axios.create({
+        headers: {
+            token: ''
+        },
+        baseURL: process.env.REACT_BASE_URL
+    }) 
+    name: ModelName | string = ''
 
-    constructor(name?: ModalName) {
-
+    constructor(name?: ModelName) {
         if (name) {
             this.name  = name
         }
