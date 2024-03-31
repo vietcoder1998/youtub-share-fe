@@ -1,19 +1,18 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { ModalName } from "../config/constants";
+import { CookieVariable, ModelName } from "../config/constants";
+import CookieHelper from "../helpers/cookie.helper";
 
-const instance =  axios.create({
-    headers: {
-        token: ''
-    },
-    baseURL: process.env.REACT_BASE_URL
-})
 
 class BaseApi {
-    instance = instance 
-    name = ''
+    instance =  axios.create({
+        headers: {
+            token: new CookieHelper().getCookie(CookieVariable.userToken)
+        },
+        baseURL: typeof process !== 'undefined' ? process.env.REACT_APP_BASE_URL : 'http://localhost:5173',
+    }) 
+    name: ModelName | string = ''
 
-    constructor(name?: ModalName) {
-
+    constructor(name?: ModelName) {
         if (name) {
             this.name  = name
         }
