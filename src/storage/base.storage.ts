@@ -1,34 +1,8 @@
+import { DetailResponse, DataListResponse, DataList } from './../types/common.d';
 import { AxiosRequestConfig } from 'axios';
-import BaseApi from "../api"
-import { ModalName, SystemLanguage } from "../config/constants"
+import BaseApi from "../api/base.api";
+import { ModelName } from "../config/constants";
 
-export enum CookieName {
-    authenticate = 'YoutubeShareAuthenticate',
-    userInfo = 'YoutubeShareUserInfoProvider',
-}
-
-export interface DataList<T> {
-    dataList: T[]
-    page: number
-    size: number
-    total: number
-}
-
-export interface Detail<T> {
-    detail: T
-}
-
-export interface DefaultResponse {
-    message: string
-    language: SystemLanguage
-    messageKey: string
-    queue: string
-    timeout: number
-}
-
-export type DeleteResponse = DefaultResponse
-export type DataListResponse<T> = DefaultResponse & DataList<T>
-export type DetailResponse<T> = DefaultResponse & Detail<T>
 
 export class StorageItem<T> implements DataList<T>{
     detail: T = {} as T
@@ -41,10 +15,10 @@ export class StorageItem<T> implements DataList<T>{
     statusList: string = ''
     statusDetail: string = ''
     statusDelete: string = ''
-    name: ModalName = ModalName.unknown
+    name: ModelName = ModelName.unknown
     api: BaseApi = new BaseApi(this.name)
 
-    constructor(name: ModalName ) {
+    constructor(name: ModelName ) {
         this.name = name
     }
 
