@@ -19,7 +19,7 @@ export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
       <Header />
       <Divider />
       <CssBaseline />
-      <Container>{props.children}</Container>
+      <Container className="bg-whitesmoke">{props.children}</Container>
     </AppContext.Provider>
   );
 };

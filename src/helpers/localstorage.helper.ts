@@ -12,7 +12,7 @@ export default class LocalStorageHelper {
     public static readonly instance  = new LocalStorageHelper()
 
     getLocalStorage(name: LocalStorageName) {
-        console.log(`name`, name, this.localStorage)
+        console.log(`name`, name, this.localStorage.getItem(name))
         return this.localStorage.getItem(name)
     }
 

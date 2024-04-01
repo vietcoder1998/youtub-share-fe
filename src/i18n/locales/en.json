@@ -1,1 +1,29 @@
-{}
+{
+    "common": {
+        "ui": {
+            "loginHeader": "Login Form",
+            "submit": "Submit"
+        },
+        "header": {
+            "youtubeShare": "Youtube share"
+        }
+    },
+    "login": {
+        "input": {
+            "emailPlaceholder": "Email must be liked this @example.com",
+            "passwordPlaceholder": "Password is required at least 8 characters long"
+        },
+        "error": {
+            "errorEmailPattern": "Email must  be included @example.com",
+            "errorPasswordPattern": "Passwords need to contain upper and lower case letters and no special characters",
+            "errorEmailRequired": "Please input a valid email",
+            "errorPasswordRequired": "Please input a valid password"
+        },
+        "header": {
+            "loginHeader": "Login form"
+        },
+        "request": {
+            "failed": "Login failed"
+        }
+    }
+}
