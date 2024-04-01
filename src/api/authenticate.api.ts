@@ -1,6 +1,6 @@
+import { DetailResponse, UserInfo } from '../types/common.d';
 import { ModelName } from './../config/constants';
 import BaseApi from './base.api';
-import { CommonType, DetailResponse } from '../types/common.d';
 
 export class AuthenticateApi extends BaseApi {
     name = ModelName.authenticate

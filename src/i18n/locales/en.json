@@ -50,6 +50,13 @@
             "shareBy": "Share by",
             "description": "description"
         }
+    },
+    "share": {
+        "button": {
+            "submit": "Share"
+        },
+        "header": {
+            "shareTitle": "Share a Youtube movie"
+        }
     }
-
 }
