@@ -20,10 +20,29 @@
             "errorPasswordRequired": "Please input a valid password"
         },
         "header": {
-            "loginHeader": "Login form"
+            "loginHeader": "Register     form"
         },
         "request": {
-            "failed": "Login failed"
+            "failed": "Register failed"
+        }
+    },
+    "register": {
+        "input": {
+            "emailPlaceholder": "Email must be liked this @example.com",
+            "passwordPlaceholder": "Password is required at least 8 characters long"
+        },
+        "error": {
+            "errorEmailPattern": "Email must  be included @example.com",
+            "errorPasswordPattern": "Passwords need to contain upper and lower case letters and no special characters",
+            "errorEmailRequired": "Please input a valid email",
+            "errorPasswordRequired": "Please input a valid password"
+        },
+        "header": {
+            "registerHeader": "Register form"
+        },
+        "request": {
+            "failed": "Register failed"
         }
     }
+
 }
