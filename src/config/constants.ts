@@ -4,7 +4,8 @@ export enum ModelName {
     user = 'user',
     authenticate = 'authenticate',
     shareLink = 'shareLink',
-    unknown = ''
+    unknown = '',
+    video = 'video'
 }
 
 export enum SystemLanguage {
