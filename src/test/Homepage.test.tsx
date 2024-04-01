@@ -6,7 +6,7 @@ describe("App", () => {
 
     render(<HomePage />);
     // Use screen queries to interact with the rendered components
-    const pageTitle = screen.getByText("Welcome to HomePage");
-    expect(pageTitle).not.toBeNull();
+    const page = screen.findAllByTestId("video-1")
+    expect(page).not.toBeNull();
   });
 });

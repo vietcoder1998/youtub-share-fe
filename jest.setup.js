@@ -24,7 +24,19 @@ const mockSocket = (connection) => {
   };
 };
 
+const mock18n = (() => {
+  return {
+    useTranslation: () => {
+      return {
+        t: (name) => {
+          return name;
+        },
+      };
+    },
+  };
+})();
 // Set up a global variable to use the mocked version of Socket.IO client
 global = {
   io: mockSocket,
+  useTranslation: mock18n.useTranslation,
 };

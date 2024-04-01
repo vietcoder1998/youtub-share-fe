@@ -5,7 +5,8 @@
             "submit": "Submit"
         },
         "header": {
-            "youtubeShare": "Youtube share"
+            "youtubeShare": "Youtube share",
+            "funnyMovie": "Funny movie"
         }
     },
     "login": {
@@ -42,6 +43,12 @@
         },
         "request": {
             "failed": "Register failed"
+        }
+    },
+    "homepage": {
+        "video": {
+            "shareBy": "Share by",
+            "description": "description"
         }
     }
 

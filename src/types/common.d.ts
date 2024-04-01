@@ -3,7 +3,7 @@ import { SystemLanguage } from "../config/constants"
 export type UserInfo = {
     id: string
     gmail: string
-    token: string
+    token?: string
 }
 
 export enum CookieName {
