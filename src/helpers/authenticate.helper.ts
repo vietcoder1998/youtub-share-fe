@@ -1,10 +1,10 @@
 import { AuthenticateApi } from "../api/authenticate.api";
-import { CookieVariable } from "../config/constants";
-import { CommonType } from '../types/common';
+import { CookieVariable, ModelName } from "../config/constants";
+import { UserInfo } from "../types/common";
 import CookieHelper from "./cookie.helper";
 
 export default class AuthenticateHelper {
-    userInfo: CommonType.UserInfo = {
+    userInfo: UserInfo = {
         id: '',
         token: '',
         gmail: '',
@@ -12,10 +12,10 @@ export default class AuthenticateHelper {
 
     cookieHelper = new CookieHelper()
     token = ''
-    authenticateApi = new AuthenticateApi()
+    authenticateApi = new AuthenticateApi(ModelName.authenticate)
     static readonly instance = new AuthenticateHelper()
 
-    async onSyncUserInfo(email: string, password: string) {
+    async handleLogin(email: string, password: string): Promise<UserInfo | undefined> {
         const userInfo = await this.authenticateApi.login(email, password)
         
         if (userInfo?.token) {
@@ -25,10 +25,25 @@ export default class AuthenticateHelper {
             this.userInfo = userInfo
         }
 
+
+        return userInfo
     }
 
-    getUserInfo(): CommonType.UserInfo {
-        const userInfo = this.cookieHelper.getCookieAsJSON<CommonType.UserInfo>(CookieVariable.userInfo)
+    async handleRegister(email: string, password: string): Promise<UserInfo | undefined> {
+        const userInfo = await this.authenticateApi.login(email, password)
+        
+        if (userInfo?.token) {
+            this.cookieHelper.setCookiesAsString(CookieVariable.userInfo,  userInfo as Object)
+            this.cookieHelper.setCookie(CookieVariable.userInfo, userInfo?.token)
+            this.token = userInfo.token
+            this.userInfo = userInfo
+        }
+
+        return userInfo
+    }
+
+    getUserInfo(): UserInfo {
+        const userInfo = this.cookieHelper.getCookieAsJSON<UserInfo>(CookieVariable.userInfo)
 
         return userInfo
     }

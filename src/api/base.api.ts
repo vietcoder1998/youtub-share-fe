@@ -8,7 +8,7 @@ class BaseApi {
         headers: {
             token: new CookieHelper().getCookie(CookieVariable.userToken)
         },
-        baseURL: typeof process !== 'undefined' ? process.env.REACT_APP_BASE_URL : 'http://localhost:5173',
+        baseURL: typeof process !== 'undefined' ? process.env.REACT_APP_BASE_URL : 'http://localhost:3030',
     }) 
     name: ModelName | string = ''
 
