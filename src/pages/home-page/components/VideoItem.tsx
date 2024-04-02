@@ -65,21 +65,44 @@ export const VideoItem: React.FC<VideoItemProps> = (props: VideoItemProps) => {
         </div>
         <div>
           <div className="flex gap-1 items-center">
-            <label>{videoDetail.like.length}</label>
-            <IconButton onClick={handleLike} disabled={!isLogin}>
-              {videoDetail?.like?.includes(user.id) && <ThumbUpIcon />}
-              {!videoDetail?.like?.includes(user.id) && <ThumbUpOffAltIcon />}
+            <label data-testid={`video-${props.video._id}-length-like`}>
+              {videoDetail.like.length}
+            </label>
+            <IconButton
+              onClick={handleLike}
+              disabled={!isLogin}
+              data-testid={`button-like-${props.video._id}`}
+            >
+              {videoDetail?.like?.includes(user.id) && (
+                <ThumbUpIcon
+                  data-testid={`thump-up-like-on-${props.video._id}`}
+                />
+              )}
+              {!videoDetail?.like?.includes(user.id) && (
+                <ThumbUpOffAltIcon
+                  data-testid={`thump-up-like-off-${props.video._id}`}
+                />
+              )}
             </IconButton>
-            <label>{videoDetail.dislike.length}</label>
+            <label data-testid={`video-${props.video._id}-length-dislike`}>
+              {videoDetail.dislike.length}
+            </label>
 
             <IconButton
               onClick={handleDislike}
               id={props.video._id}
               disabled={!isLogin}
+              data-testid={`button-dislike-${props.video._id}`}
             >
-              {videoDetail?.dislike?.includes(user.id) && <ThumbDownAltIcon />}
+              {videoDetail?.dislike?.includes(user.id) && (
+                <ThumbDownAltIcon
+                  data-testid={`thump-down-dislike-off-${props.video._id}`}
+                />
+              )}
               {!videoDetail?.dislike?.includes(user.id) && (
-                <ThumbDownOffAltIcon />
+                <ThumbDownOffAltIcon
+                  data-testid={`thump-down-dislike-on-${props.video._id}`}
+                />
               )}
             </IconButton>
           </div>
