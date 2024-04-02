@@ -14,7 +14,7 @@ export enum SystemLanguage {
 }
 
 export enum CookieVariable {
-    userInfo = 'sytusi',
+    userInfo = 'sytusif',
     userToken = 'sytutk',
     userId = 'sytuuid'
 }

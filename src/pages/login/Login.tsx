@@ -10,7 +10,7 @@ export const Login: React.FC = () => {
       <Grid md={4}>
         <div className="my-10 border-1 bg-white px-5 py-4">
           <p className={"mb-6 text-black font-bold text-xl"}>{t("login.header.loginHeader")}</p>
-          <LoginForm />
+          <LoginForm className="flex flex-col gap-2" />
         </div>
       </Grid>
       <Grid md={4}></Grid>

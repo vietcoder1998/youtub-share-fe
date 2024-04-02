@@ -11,7 +11,11 @@ export type LoginFormType = {
   password: string;
 };
 
-export const LoginForm: React.FC = () => {
+export interface LoginFormProps {
+  className?: string;
+}
+
+export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
   const {
     register,
     handleSubmit,
@@ -24,22 +28,27 @@ export const LoginForm: React.FC = () => {
   const navigate = useNavigate();
   const onSubmit = async (values: LoginFormType) => {
     setStatus(RequestStatus.pending);
-    const result: UserInfo | undefined =
-      await AuthenticateHelper.instance.handleLogin(
-        values.email,
-        values.password
-      );
-
-    if (result) {
-      navigate("/");
-    } else {
-      toast.error(t("login.request.failed"));
-    }
+    AuthenticateHelper.instance
+      .handleLogin(values.email, values.password)
+      .then(() => {
+        toast.success("Login successfully");
+        navigate("/");
+      })
+      .catch((error) => {
+        if (error) {
+          toast.error(t("login.request.failed"));
+        }
+      });
   };
 
   return (
-    <Box component="form" id="login-form" onSubmit={handleSubmit(onSubmit)}>
-      <div className="mb-6">
+    <Box
+      component="form"
+      className={[props.className, "gap-2"].join(" ")}
+      id="login-form"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <div className="flex items-center">
         <TextField
           error={Boolean(errors.email)}
           fullWidth={true}
@@ -55,7 +64,7 @@ export const LoginForm: React.FC = () => {
           placeholder={t("login.input.emailPlaceholder")}
         ></TextField>
       </div>
-      <div className="mb-6">
+      <div className="flex items-center">
         <TextField
           className="my-10"
           error={Boolean(errors.password)}
@@ -74,10 +83,17 @@ export const LoginForm: React.FC = () => {
           placeholder={t("login.input.passwordPlaceholder")}
         ></TextField>
       </div>
-      <Button variant="contained" type={"submit"} fullWidth={true}>
-        {status === RequestStatus.pending && <CircularProgress />}
-        {status !== RequestStatus.pending && t("common.ui.submit")}
-      </Button>
+      <div className="">
+        <Button
+          variant="contained"
+          type={"submit"}
+          fullWidth={true}
+          size="small"
+        >
+          {status === RequestStatus.pending && <CircularProgress />}
+          {status !== RequestStatus.pending && t("common.ui.submit")}
+        </Button>
+      </div>
     </Box>
   );
 };

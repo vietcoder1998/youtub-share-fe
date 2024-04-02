@@ -2,11 +2,19 @@
     "common": {
         "ui": {
             "loginHeader": "Login Form",
-            "submit": "Submit"
+            "submit": "Submit",
+            "backToHome": "Back to Home"
         },
         "header": {
-            "youtubeShare": "Youtube share",
-            "funnyMovie": "Funny movie"
+            "youtubeShare": "Share a movie",
+            "funnyMovie": "Funny movie",
+            "welcome": "Welcome",
+            "logout": "Log out",
+            "login": "Login",
+            "register": "Register"
+        },
+        "page": {
+            "permissionError": "Sorry, your permission is error (code: 403)"
         }
     },
     "login": {
@@ -57,6 +65,9 @@
         },
         "header": {
             "shareTitle": "Share a Youtube movie"
+        },
+        "title": {
+            "youtubeUrl": "Youtube URL: "
         }
     }
 }

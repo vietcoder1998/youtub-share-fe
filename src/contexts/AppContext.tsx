@@ -1,13 +1,15 @@
 import React from "react";
-import { DefaultLayoutType } from "../types/common";
 import AuthenticateHelper from "../helpers/authenticate.helper";
+import { AppContextType } from "../types/common";
 
-export const DefaultContextValue: DefaultLayoutType.AppContextType = {
+export const DefaultContextValue: AppContextType = {
   header: {
     isLogin: false,
     user: {
-      gmail: "",
+      email: "",
       token: "",
+      id: "",
+      username: "",
     },
   },
   pageState: {
@@ -17,7 +19,7 @@ export const DefaultContextValue: DefaultLayoutType.AppContextType = {
     },
   },
   onLogout: AuthenticateHelper.instance.onLogOut,
-  isLogin: AuthenticateHelper.instance.isLogin,
+  isLogin: false,
 };
 export const AppContext =
-  React.createContext<DefaultLayoutType.AppContextType>(DefaultContextValue);
+  React.createContext<AppContextType>(DefaultContextValue);
