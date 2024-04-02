@@ -52,13 +52,15 @@ export default class AuthenticateHelper {
     }
 
     onLogOut() {
-        this.cookieHelper.deleteCookie(CookieVariable.userToken)
-        this.cookieHelper.deleteCookie(CookieVariable.userId)
-        this.cookieHelper.deleteCookie(CookieVariable.userInfo)
+        this.authenticateApi.logOut().then((response) => {
+            if (response) {
+                this.cookieHelper.deleteCookie(CookieVariable.userToken)
+                this.cookieHelper.deleteCookie(CookieVariable.userId)
+                this.cookieHelper.deleteCookie(CookieVariable.userInfo)
 
-        this.authenticateApi.logOut(this.userInfo.id)
-
-        window.location.reload()
+                window.location.reload()
+            }
+        })
     }
 
 }

@@ -16,11 +16,7 @@ const mockSocket = (connection) => {
 
       return event;
     },
-    on: (name, event) => {
-      event(name);
-
-      return name;
-    },
+    on: jest.fn(),
   };
 };
 
@@ -39,4 +35,11 @@ const mock18n = (() => {
 global = {
   io: mockSocket,
   useTranslation: mock18n.useTranslation,
+  AppContext: {
+    socket: {
+      on: () => {
+        return () => jest.fn();
+      },
+    },
+  },
 };

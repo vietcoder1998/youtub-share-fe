@@ -5,7 +5,7 @@ import { QueryList } from "../types/common";
 
 
 class BaseApi {
-    instance =  axios.create({
+    public instance =  axios.create({
         headers: {
             token: `Bearer ${new CookieHelper().getCookie(CookieVariable.userToken)}`,
             'Funny-Movie-User-Id': new CookieHelper().getCookie(CookieVariable.userId)
