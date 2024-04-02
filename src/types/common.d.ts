@@ -1,3 +1,4 @@
+import { Socket } from "socket.io-client"
 import { SystemLanguage } from "../config/constants"
 
 export type UserInfo = {
@@ -63,6 +64,7 @@ export type AppContextType = {
     pageState?: PageState
     onLogout: () => void
     isLogin: boolean
+    socket: Socket
 }
 export type HeaderProps = {
     isLogin: boolean

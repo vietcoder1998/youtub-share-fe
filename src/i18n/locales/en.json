@@ -32,7 +32,7 @@
             "loginHeader": "Login form"
         },
         "request": {
-            "failed": "Login failed"
+            "failed": "Login failed, your email or password is not correct"
         }
     },
     "register": {

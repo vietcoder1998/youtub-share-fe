@@ -24,9 +24,9 @@ export const DefaultHeader: React.FC = () => {
         </Grid>
         <Grid item md={9} lg={9} xs={9}>
           <div className="flex justify-end gap-20">
-            <div className="flex gap-2 justify-end w=[70%]">
-              <label>{t("common.header.welcome")}</label>
-              <label>{data?.header?.user?.email}</label>
+            <div className="flex gap-2 justify-end w=[70%] items-center">
+              <label className="">{t("common.header.welcome")}</label>
+              <label className="font-bold">{data?.header?.user?.email}</label>
             </div>
             <div className="flex items-center justify-end gap-2">
               <Button onClick={onNavigateToShare} variant="contained">

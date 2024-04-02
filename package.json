@@ -9,7 +9,7 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "postcss": {
     "config": "./config/postcss.config.js"

@@ -4,9 +4,10 @@ import { io } from "socket.io-client";
 import { AppContext } from "../contexts/AppContext";
 import AuthenticateHelper from "../helpers/authenticate.helper";
 import { HeaderProps } from "../types/common.d";
+import { WrappingComponent } from "./Wrapping";
 import { Header } from "./components/Header";
 
-const socket = io("ws://localhost:3001");
+const socket = io("ws://localhost:3031");
 
 export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
   children: JSX.Element;
@@ -35,7 +36,6 @@ export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
       user: userInfo,
     } as HeaderProps);
 
-    console.log("userInfo", AuthenticateHelper.instance.getUserInfo());
     return () => {
       socket.off("connection", () => {
         console.log("Connection closed");
@@ -47,6 +47,7 @@ export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
     return {
       header,
       isLogin,
+      socket,
       onLogout: () => AuthenticateHelper.instance.onLogOut(),
     };
   }, [header, isLogin, AuthenticateHelper.instance.onLogOut]);
@@ -55,7 +56,13 @@ export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
       <Header />
       <Divider />
       <CssBaseline />
-      <Container className="bg-whitesmoke">{props.children}</Container>
+      <Container className="bg-whitesmoke">
+        <WrappingComponent
+          is403={window.location.pathname === "/share" && !isLogin}
+        >
+          {props.children}
+        </WrappingComponent>
+      </Container>
     </AppContext.Provider>
   );
 };

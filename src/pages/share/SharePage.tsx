@@ -24,8 +24,6 @@ export const SharePage: React.FC = () => {
   const navigate = useNavigate();
 
   const onSubmitVideo = async (values: { link: string }) => {
-    console.log(values.link);
-
     VideoApi.apiInstance
       .shareVideo(values.link)
       .then((response) => {
