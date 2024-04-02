@@ -21,10 +21,10 @@
             "errorPasswordRequired": "Please input a valid password"
         },
         "header": {
-            "loginHeader": "Register     form"
+            "loginHeader": "Login form"
         },
         "request": {
-            "failed": "Register failed"
+            "failed": "Login failed"
         }
     },
     "register": {

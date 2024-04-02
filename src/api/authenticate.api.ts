@@ -1,4 +1,5 @@
 import { DetailResponse, UserInfo } from '../types/common.d';
+import { RegisterData } from '../types/register';
 import { ModelName } from './../config/constants';
 import BaseApi from './base.api';
 
@@ -33,8 +34,8 @@ export class AuthenticateApi extends BaseApi {
     }
     
 
-    async register(id: string): Promise<UserInfo | undefined> { 
-        const response = await this.instance.put<DetailResponse<Register>>(`/${this.name}/register/${id}`, )
+    async register(email: string, password: string): Promise<RegisterData> { 
+        const response = await this.instance.put<DetailResponse<RegisterData>>(`/${this.name}/register`, { email, password } )
     
         if (!response) {
             throw new Error("Could not register user")

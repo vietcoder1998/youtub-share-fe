@@ -2,7 +2,7 @@ import { SystemLanguage } from "../config/constants"
 
 export type UserInfo = {
     id: string
-    gmail: string
+    email: string
     token?: string
 }
 
@@ -28,6 +28,11 @@ export type DefaultResponse = {
     messageKey: string
     queue: string
     timeout: number
+}
+
+export type QueryList = {
+    index?: number
+    size?: number
 }
 
 export type DeleteResponse = DefaultResponse
