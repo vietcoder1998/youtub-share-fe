@@ -8,7 +8,8 @@ export default class CookieHelper {
     }
 
     setCookiesAsString<T>(name: CookieVariable, value: T, options?: CookieSetOptions) {
-        return this.cookies.set(name, JSON.stringify(value), options)
+        console.log(`setCookiesAsString`, value)
+        return this.cookies.set(name, value, options)
     }
 
     setCookie(name: CookieVariable, value: string, options?: CookieSetOptions) {
@@ -16,7 +17,10 @@ export default class CookieHelper {
     }
 
     getCookieAsJSON<T>(name: CookieVariable, options?: CookieGetOptions) {
-        return JSON.parse(this.cookies.get(name, options)) as T
+        const data = this.cookies.get(name, options) ?? {}
+        console.log(data)
+
+        return data as T
     }
 
     deleteCookie(name: CookieVariable, options?: CookieSetOptions) {
