@@ -1,13 +1,14 @@
 import { AuthenticateApi } from "../api/authenticate.api";
 import { CookieVariable, ModelName } from "../config/constants";
 import { UserInfo } from "../types/common";
+import { RegisterData } from "../types/register";
 import CookieHelper from "./cookie.helper";
 
 export default class AuthenticateHelper {
     userInfo: UserInfo = {
         id: '',
         token: '',
-        gmail: '',
+        email: '',
     }
 
     cookieHelper = new CookieHelper()
@@ -19,27 +20,20 @@ export default class AuthenticateHelper {
         const userInfo = await this.authenticateApi.login(email, password)
         
         if (userInfo?.token) {
-            this.cookieHelper.setCookiesAsString(CookieVariable.userInfo,  userInfo as Object)
+            this.cookieHelper.setCookiesAsString<UserInfo>(CookieVariable.userInfo,  userInfo)
             this.cookieHelper.setCookie(CookieVariable.userInfo, userInfo?.token)
+            this.cookieHelper.setCookie(CookieVariable.userId, userInfo?.id)
             this.token = userInfo.token
             this.userInfo = userInfo
         }
-
 
         return userInfo
     }
 
-    async handleRegister(email: string, password: string): Promise<UserInfo | undefined> {
-        const userInfo = await this.authenticateApi.login(email, password)
+    async handleRegister(email: string, password: string): Promise<RegisterData> {
+        const response = await this.authenticateApi.register(email, password)
         
-        if (userInfo?.token) {
-            this.cookieHelper.setCookiesAsString(CookieVariable.userInfo,  userInfo as Object)
-            this.cookieHelper.setCookie(CookieVariable.userInfo, userInfo?.token)
-            this.token = userInfo.token
-            this.userInfo = userInfo
-        }
-
-        return userInfo
+        return response
     }
 
     getUserInfo(): UserInfo {

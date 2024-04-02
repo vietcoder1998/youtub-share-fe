@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { VideoApi } from "../../api/video.api";
 import { RequestStatus } from "../../types/common.d";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export type ShareLink = {
   link: string;
@@ -19,6 +21,7 @@ export const SharePage: React.FC = () => {
     RequestStatus.default
   );
   const { t } = useTranslation();
+  const navigate  = useNavigate()
 
   const onSubmitVideo = async (values: { link: string }) => {
     console.log(values.link);
@@ -28,6 +31,8 @@ export const SharePage: React.FC = () => {
       .then((response) => {
         if (response) {
           setStatus(RequestStatus.success);
+          navigate('/')
+          toast.success("Success on share video")
         }
       })
       .catch((error) => {
