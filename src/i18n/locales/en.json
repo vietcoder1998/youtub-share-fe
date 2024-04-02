@@ -2,11 +2,19 @@
     "common": {
         "ui": {
             "loginHeader": "Login Form",
-            "submit": "Submit"
+            "submit": "Submit",
+            "backToHome": "Back to Home"
         },
         "header": {
-            "youtubeShare": "Youtube share",
-            "funnyMovie": "Funny movie"
+            "youtubeShare": "Share a movie",
+            "funnyMovie": "Funny movie",
+            "welcome": "Welcome",
+            "logout": "Log out",
+            "login": "Login",
+            "register": "Register"
+        },
+        "page": {
+            "permissionError": "Sorry, your permission is error (code: 403)"
         }
     },
     "login": {
@@ -21,10 +29,10 @@
             "errorPasswordRequired": "Please input a valid password"
         },
         "header": {
-            "loginHeader": "Register     form"
+            "loginHeader": "Login form"
         },
         "request": {
-            "failed": "Register failed"
+            "failed": "Login failed, your email or password is not correct"
         }
     },
     "register": {
@@ -50,6 +58,16 @@
             "shareBy": "Share by",
             "description": "description"
         }
+    },
+    "share": {
+        "button": {
+            "submit": "Share"
+        },
+        "header": {
+            "shareTitle": "Share a Youtube movie"
+        },
+        "title": {
+            "youtubeUrl": "Youtube URL: "
+        }
     }
-
 }

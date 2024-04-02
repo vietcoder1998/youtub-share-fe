@@ -1,4 +1,7 @@
-import { UserInfo } from "../../../types/common";
+import React from "react";
+import { VideoApi } from "../../../api/video.api";
+import { DataList, UserInfo } from "../../../types/common";
+import { Video } from "../../../types/home-page";
 import { VideoItem } from "./VideoItem";
 
 export type VideoItemData = {
@@ -11,48 +14,19 @@ export type VideoItemData = {
   user: UserInfo;
 };
 
-export const exampleData = [
-  {
-    id: "1",
-    link: "https://youtu.be/1w7OgIMMRc4?si=yZNvDIfpJiI3B8HB",
-    like: 10,
-    dislike: 20,
-    title: "test",
-    description: "test description",
-    user: {
-      gmail: "gmail@test.com",
-      id: "test",
-    },
-  },
-  {
-    id: "2",
-    link: "https://youtu.be/embed/1w7OgIMMRc4?si=yZNvDIfpJiI3B8HB",
-    like: 10,
-    dislike: 20,
-    title: "test",
-    description: "test description",
-    user: {
-      gmail: "gmail@test.com",
-      id: "test",
-    },
-  },
-  {
-    id: "2",
-    link: "https://youtu.be/1w7OgIMMRc4?si=yZNvDIfpJiI3B8HB",
-    like: 10,
-    dislike: 20,
-    title: "test",
-    description: "test description",
-    user: {
-      gmail: "gmail@test.com",
-      id: "test",
-    },
-  },
-] as VideoItemData[];
 export const VideoList: React.FC = () => {
+  const [youtubeList, setYoutubeList] = React.useState<Video[]>([] as Video[]);
+  React.useEffect(() => {
+    VideoApi.apiInstance.getList<DataList<Video>>().then((response) => {
+      if (response.data.dataList) {
+        setYoutubeList(response.data.dataList);
+      }
+      console.log(response);
+    });
+  }, []);
   return (
     <div className="video-list">
-      {exampleData.map((item, index) => (
+      {youtubeList.map((item, index) => (
         <VideoItem key={["video", index].join("-")} video={item} />
       ))}
     </div>

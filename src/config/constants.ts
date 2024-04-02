@@ -4,7 +4,8 @@ export enum ModelName {
     user = 'user',
     authenticate = 'authenticate',
     shareLink = 'shareLink',
-    unknown = ''
+    unknown = '',
+    video = 'video'
 }
 
 export enum SystemLanguage {
@@ -13,7 +14,7 @@ export enum SystemLanguage {
 }
 
 export enum CookieVariable {
-    userInfo = 'sytusi',
+    userInfo = 'sytusif',
     userToken = 'sytutk',
     userId = 'sytuuid'
 }

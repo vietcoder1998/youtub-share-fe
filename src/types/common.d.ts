@@ -2,7 +2,8 @@ import { SystemLanguage } from "../config/constants"
 
 export type UserInfo = {
     id: string
-    gmail: string
+    email: string
+    username: string
     token?: string
 }
 
@@ -30,6 +31,11 @@ export type DefaultResponse = {
     timeout: number
 }
 
+export type QueryList = {
+    index?: number
+    size?: number
+}
+
 export type DeleteResponse = DefaultResponse
 export type DataListResponse<T> = DefaultResponse & DataList<T>
 export type DetailResponse<T> = DefaultResponse & Detail<T>
@@ -45,23 +51,21 @@ export enum RequestStatus {
     finished = "finished"
 }
 
-export declare namespace DefaultLayoutType {
-    export type HeaderProps = {
-        isLogin: boolean
-        user: UserInfo
-    }
-
-    export type PageState = {
-        scroll: {
-            x: number
-            y: number
-        }
-    }
-
-    export type AppContextType = {
-        header: HeaderProps
-        pageState: PageState
-        onLogout: () => void
-        isLogin: () => boolean
+export type PageState = {
+    scroll: {
+        x: number
+        y: number
     }
 }
+
+export type AppContextType = {
+    header: HeaderProps
+    pageState?: PageState
+    onLogout: () => void
+    isLogin: boolean
+}
+export type HeaderProps = {
+    isLogin: boolean
+    user: UserInfo
+}
+

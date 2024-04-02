@@ -1,14 +1,16 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { CookieVariable, ModelName } from "../config/constants";
 import CookieHelper from "../helpers/cookie.helper";
+import { QueryList } from "../types/common";
 
 
 class BaseApi {
     instance =  axios.create({
         headers: {
-            token: new CookieHelper().getCookie(CookieVariable.userToken)
+            token: `Bearer ${new CookieHelper().getCookie(CookieVariable.userToken)}`,
+            'Funny-Movie-User-Id': new CookieHelper().getCookie(CookieVariable.userId)
         },
-        baseURL: typeof process !== 'undefined' ? process.env.REACT_APP_BASE_URL : 'http://localhost:3030',
+        baseURL: typeof process !== 'undefined' ? process.env.REACT_APP_BASE_URL : 'http://localhost:3030/api/v1',
     }) 
     name: ModelName | string = ''
 
@@ -18,8 +20,8 @@ class BaseApi {
         }
     }
 
-    getList = async (config?: AxiosRequestConfig) =>{
-        return this.instance.get(`/${this.name}`, config)
+    getList = async <R>(config?: AxiosRequestConfig) =>{
+        return this.instance.get<QueryList, AxiosResponse<R>>(`/${this.name}`, config)
     }
 
     getDetail = async (id: string, config?: AxiosRequestConfig) => {
@@ -31,8 +33,8 @@ class BaseApi {
         return this.instance.post(`/${this.name}/${id}`, config)
     }
 
-    create = async (config?: AxiosRequestConfig) => {
-        return this.instance.put(`/${this.name}`, config)
+    create = async <T>(body?: T, config?: AxiosRequestConfig) => {
+        return this.instance.put(`/${this.name}`, body, config)
     }
 
     deleteOne = async (id: string, config?: AxiosRequestConfig) => {

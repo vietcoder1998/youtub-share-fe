@@ -1,45 +1,38 @@
 import { AuthenticateApi } from "../api/authenticate.api";
 import { CookieVariable, ModelName } from "../config/constants";
-import { UserInfo } from "../types/common";
+import { UserInfo } from '../types/common';
+import { RegisterData } from "../types/register";
 import CookieHelper from "./cookie.helper";
 
 export default class AuthenticateHelper {
     userInfo: UserInfo = {
         id: '',
         token: '',
-        gmail: '',
+        email: '',
+        username: '',
     }
 
-    cookieHelper = new CookieHelper()
     token = ''
+    cookieHelper = new CookieHelper()
     authenticateApi = new AuthenticateApi(ModelName.authenticate)
     static readonly instance = new AuthenticateHelper()
 
     async handleLogin(email: string, password: string): Promise<UserInfo | undefined> {
-        const userInfo = await this.authenticateApi.login(email, password)
-        
-        if (userInfo?.token) {
-            this.cookieHelper.setCookiesAsString(CookieVariable.userInfo,  userInfo as Object)
-            this.cookieHelper.setCookie(CookieVariable.userInfo, userInfo?.token)
-            this.token = userInfo.token
-            this.userInfo = userInfo
-        }
+        return await this.authenticateApi.login(email, password).then((userInfo) => {
+            if (userInfo) {
+                this.cookieHelper.setCookiesAsString<UserInfo>(CookieVariable.userInfo,  { id: userInfo.id, username: userInfo.username, email: userInfo.email})
+                this.cookieHelper.setCookie(CookieVariable.userToken, userInfo?.token ?? '')
+                this.cookieHelper.setCookie(CookieVariable.userId, userInfo?.id)
+            }
+            return userInfo
+        })
 
-
-        return userInfo
     }
 
-    async handleRegister(email: string, password: string): Promise<UserInfo | undefined> {
-        const userInfo = await this.authenticateApi.login(email, password)
+    async handleRegister(email: string, password: string): Promise<RegisterData> {
+        const response = await this.authenticateApi.register(email, password)
         
-        if (userInfo?.token) {
-            this.cookieHelper.setCookiesAsString(CookieVariable.userInfo,  userInfo as Object)
-            this.cookieHelper.setCookie(CookieVariable.userInfo, userInfo?.token)
-            this.token = userInfo.token
-            this.userInfo = userInfo
-        }
-
-        return userInfo
+        return response
     }
 
     getUserInfo(): UserInfo {
@@ -60,9 +53,12 @@ export default class AuthenticateHelper {
 
     onLogOut() {
         this.cookieHelper.deleteCookie(CookieVariable.userToken)
-        this.cookieHelper.deleteCookie(CookieVariable.userToken)
+        this.cookieHelper.deleteCookie(CookieVariable.userId)
+        this.cookieHelper.deleteCookie(CookieVariable.userInfo)
 
         this.authenticateApi.logOut(this.userInfo.id)
+
+        window.location.reload()
     }
 
 }
