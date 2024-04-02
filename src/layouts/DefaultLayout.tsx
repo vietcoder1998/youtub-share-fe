@@ -36,7 +36,6 @@ export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
       user: userInfo,
     } as HeaderProps);
 
-    console.log("userInfo", AuthenticateHelper.instance.getUserInfo());
     return () => {
       socket.off("connection", () => {
         console.log("Connection closed");

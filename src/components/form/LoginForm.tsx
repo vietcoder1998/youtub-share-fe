@@ -99,7 +99,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
           fullWidth={true}
           size="small"
         >
-          {status === RequestStatus.pending && <CircularProgress />}
+          {status === RequestStatus.pending && <CircularProgress  />}
           {status !== RequestStatus.pending && t("common.ui.submit")}
         </Button>
       </div>

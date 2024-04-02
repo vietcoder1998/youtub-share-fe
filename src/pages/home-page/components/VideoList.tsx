@@ -21,7 +21,6 @@ export const VideoList: React.FC = () => {
       if (response.data.dataList) {
         setYoutubeList(response.data.dataList);
       }
-      console.log(response);
     });
   }, []);
   return (
