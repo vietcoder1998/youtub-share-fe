@@ -23,8 +23,8 @@ export class AuthenticateApi extends BaseApi {
         return response.data.detail
     }
 
-    async logOut(id: string): Promise<UserInfo | undefined> { 
-        const response = await this.instance.delete<DetailResponse<UserInfo>>(`/${this.name}/logout/${id}`, )
+    async logOut(): Promise<UserInfo | undefined> { 
+        const response = await this.instance.delete<DetailResponse<UserInfo>>(`/${this.name}/logout`)
     
         if (!response) {
             throw new Error("Could not find user")

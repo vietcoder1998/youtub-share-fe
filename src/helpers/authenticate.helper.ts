@@ -52,8 +52,7 @@ export default class AuthenticateHelper {
     }
 
     onLogOut() {
-        const userInfo = this.getUserInfo()
-        this.authenticateApi.logOut(userInfo.id).then((response) => {
+        this.authenticateApi.logOut().then((response) => {
             if (response) {
                 this.cookieHelper.deleteCookie(CookieVariable.userToken)
                 this.cookieHelper.deleteCookie(CookieVariable.userId)

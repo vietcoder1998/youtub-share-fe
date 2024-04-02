@@ -7,7 +7,7 @@ import { HeaderProps } from "../types/common.d";
 import { WrappingComponent } from "./Wrapping";
 import { Header } from "./components/Header";
 
-const socket = io("ws://localhost:3001");
+const socket = io("ws://localhost:3031");
 
 export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
   children: JSX.Element;
@@ -47,6 +47,7 @@ export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
     return {
       header,
       isLogin,
+      socket,
       onLogout: () => AuthenticateHelper.instance.onLogOut(),
     };
   }, [header, isLogin, AuthenticateHelper.instance.onLogOut]);
