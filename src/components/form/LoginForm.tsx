@@ -32,11 +32,20 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
       .handleLogin(values.email, values.password)
       .then(() => {
         toast.success("Login successfully");
-        navigate("/");
+
+        if (window.location.pathname === "/") {
+          window.location.reload();
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         if (error) {
           toast.error(t("login.request.failed"));
+
+          if (window.location.pathname === '/') {
+            navigate("/register")
+          }
         }
       });
   };

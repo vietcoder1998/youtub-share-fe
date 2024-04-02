@@ -1,8 +1,12 @@
+import ThumbDownAltIcon from "@mui/icons-material/ThumbDownAlt";
 import ThumbDownOffAltIcon from "@mui/icons-material/ThumbDownOffAlt";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import { IconButton } from "@mui/material";
 import React, { Key } from "react";
 import { useTranslation } from "react-i18next";
+import { VideoApi } from "../../../api/video.api";
+import { AppContext } from "../../../contexts/AppContext";
 import { Video } from "../../../types/home-page";
 
 type VideoItemProps = {
@@ -11,28 +15,32 @@ type VideoItemProps = {
 };
 
 export const VideoItem: React.FC<VideoItemProps> = (props: VideoItemProps) => {
-  const handleLike = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    const id = (event.target as HTMLButtonElement).id;
-    //TODO: handle click Like in here
-
-    return id;
+  const {
+    header: { user },
+    isLogin,
+  } = React.useContext(AppContext);
+  const [videoDetail, setVideoDetail] = React.useState<Video>(props.video);
+  const handleLike = () => {
+    VideoApi.apiInstance.postLike(props.video._id).then((response) => {
+      if (response.data.detail) {
+        setVideoDetail(response.data.detail);
+      }
+    });
   };
 
-  const handleDislike = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    const id = (event.target as HTMLButtonElement).id;
-    // TODO: handle click dislike in here
-    return id;
+  const handleDislike = () => {
+    VideoApi.apiInstance.postDislike(props.video._id).then((response) => {
+      if (response.data.detail) {
+        setVideoDetail(response.data.detail);
+      }
+    });
   };
   const { t } = useTranslation();
 
   return (
     <div
       className="video-item flex gap-10 mb-10 "
-      data-testid={`video-${props.video.id}`}
+      data-testid={`video-${props.video._id}`}
     >
       <div>
         {props.video.link && (
@@ -44,9 +52,7 @@ export const VideoItem: React.FC<VideoItemProps> = (props: VideoItemProps) => {
           ></iframe>
         )}
         {!props.video.link && (
-          <div className="bg-grey-200 w-[420px] h-[345px]">
-            No item found
-          </div>
+          <div className="bg-grey-200 w-[420px] h-[345px]">No item found</div>
         )}
       </div>
       <div className="">
@@ -58,19 +64,24 @@ export const VideoItem: React.FC<VideoItemProps> = (props: VideoItemProps) => {
           <label>{props.video.user.email}</label>
         </div>
         <div>
-          <div className="flex gap-2">
-            <label>
-              {props.video.like.length}
-              <IconButton onClick={handleLike}>
-                <ThumbUpOffAltIcon />
-              </IconButton>
-            </label>
-            <label>
-              {props.video.dislike.length}
-              <IconButton onClick={handleDislike} id={props.video.id}>
+          <div className="flex gap-1 items-center">
+            <label>{videoDetail.like.length}</label>
+            <IconButton onClick={handleLike} disabled={!isLogin}>
+              {videoDetail?.like?.includes(user.id) && <ThumbUpIcon />}
+              {!videoDetail?.like?.includes(user.id) && <ThumbUpOffAltIcon />}
+            </IconButton>
+            <label>{videoDetail.dislike.length}</label>
+
+            <IconButton
+              onClick={handleDislike}
+              id={props.video._id}
+              disabled={!isLogin}
+            >
+              {videoDetail?.dislike?.includes(user.id) && <ThumbDownAltIcon />}
+              {!videoDetail?.dislike?.includes(user.id) && (
                 <ThumbDownOffAltIcon />
-              </IconButton>
-            </label>
+              )}
+            </IconButton>
           </div>
         </div>
         <div className="justify-start">
