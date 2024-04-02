@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthenticateHelper from "../../helpers/authenticate.helper";
-import { RequestStatus, UserInfo } from "../../types/common.d";
+import { RequestStatus } from "../../types/common.d";
 export type LoginFormType = {
   email: string;
   password: string;
@@ -43,8 +43,8 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
         if (error) {
           toast.error(t("login.request.failed"));
 
-          if (window.location.pathname === '/') {
-            navigate("/register")
+          if (window.location.pathname === "/") {
+            navigate("/register");
           }
         }
       });
@@ -99,7 +99,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
           fullWidth={true}
           size="small"
         >
-          {status === RequestStatus.pending && <CircularProgress  />}
+          {status === RequestStatus.pending && <CircularProgress />}
           {status !== RequestStatus.pending && t("common.ui.submit")}
         </Button>
       </div>

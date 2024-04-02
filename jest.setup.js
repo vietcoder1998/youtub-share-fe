@@ -1,5 +1,4 @@
 // jest.setup.js
-
 // Import the Socket.IO client mock
 /**
  * [mockSocket description]
@@ -20,21 +19,27 @@ const mockSocket = (connection) => {
   };
 };
 
-const mock18n = (() => {
-  return {
-    useTranslation: () => {
-      return {
-        t: (name) => {
-          return name;
-        },
-      };
-    },
-  };
-})();
-// Set up a global variable to use the mocked version of Socket.IO client
+const { initReactI18next, useTranslation } = require("react-i18next");
+const i18n = require("i18next");
+
+// Initialize i18next
+i18n.use(initReactI18next).init({
+  resources: {},
+  lng: "en",
+  fallbackLng: "en",
+  interpolation: {
+    escapeValue: false,
+  },
+});
+
+jest.mock("react-i18next", () => ({
+  useTranslation: () => ({ t: (key) => key }), // Mock implementation of useTranslation
+}));
+
 global = {
   io: mockSocket,
-  useTranslation: mock18n.useTranslation,
+  useTranslation: () => ({ t: (key) => key }), // Mock implementation of useTranslation
+
   AppContext: {
     socket: {
       on: () => {
