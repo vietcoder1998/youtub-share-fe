@@ -7,7 +7,7 @@ import { HeaderProps } from "../types/common.d";
 import { WrappingComponent } from "./Wrapping";
 import { Header } from "./components/Header";
 
-const socket = io("ws://localhost:3031");
+const socket = io(process.env.VITE_APP_WS ?? 'ws://localhost:3031');
 
 export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
   children: JSX.Element;
