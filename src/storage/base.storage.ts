@@ -4,9 +4,9 @@ import BaseApi from "../api/base.api";
 import { ModelName } from "../config/constants";
 
 
-export class StorageItem<T> implements DataList<T>{
+export class StorageItem<T>{
     detail: T = {} as T
-    dataList: T[] = []  as T[]
+    dataList: T[] = []
     page: number = 0
     size: number = 0
     total: number = 0
@@ -24,7 +24,7 @@ export class StorageItem<T> implements DataList<T>{
 
     getList = async (config?: AxiosRequestConfig) => {
         this.loadingList = true
-        this.api.getList(config).then((response: AxiosRequestConfig<DataListResponse<T>> )=> {
+        this.api.getList<DataListResponse<T>>(config).then((response)=> {
             if (response?.data?.dataList) {
                 this.dataList = response.data.dataList;
                 this.total = response.data.total

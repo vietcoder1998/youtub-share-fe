@@ -10,7 +10,7 @@ class BaseApi {
             token: `Bearer ${new CookieHelper().getCookie(CookieVariable.userToken)}`,
             'Funny-Movie-User-Id': new CookieHelper().getCookie(CookieVariable.userId)
         },
-        baseURL: typeof process !== 'undefined' ? process.env.REACT_APP_BASE_URL : 'http://localhost:3030/api/v1',
+        baseURL: typeof process !== 'undefined' ? process.env.REACT_APP_BASE_API : 'http://localhost:3030/api/v1',
     }) 
     name: ModelName | string = ''
 
