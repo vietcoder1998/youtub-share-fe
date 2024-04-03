@@ -1,4 +1,15 @@
 // jest.setup.js
+// mock env
+jest.mock("vite", () => ({
+  meta: {
+    env: {
+      VITE_BASE_URL: "http://localhost:5173",
+      VITE_BASE_API: "http://localhost:3030",
+      VITE_WS: "ws://localhost:3031"
+    },
+  },
+}));
+
 // Import the Socket.IO client mock
 /**
  * [mockSocket description]

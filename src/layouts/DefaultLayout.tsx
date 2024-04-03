@@ -6,10 +6,10 @@ import AuthenticateHelper from "../helpers/authenticate.helper";
 import { HeaderProps } from "../types/common.d";
 import { WrappingComponent } from "./Wrapping";
 import { Header } from "./components/Header";
+import { VITE_WS } from "../config/env";
 
-const socket = io(
-  typeof process !== "undefined" ? process.env.VITE_WS : "ws://localhost:3031"
-);
+const ioWs: string = String(VITE_WS);
+const socket = io(ioWs);
 
 export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
   children: JSX.Element;

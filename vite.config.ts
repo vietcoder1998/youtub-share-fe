@@ -7,10 +7,11 @@ import autoprefixer from 'autoprefixer';
 // https://vitejs.dev/config/
 export default ({mode}: {mode: string}) => {
   process.env = {...process.env, ...loadEnv(mode, process.cwd())};
-  console.log('process.env', process.env);
 
   return defineConfig({
+  // Config for react
   plugins: [react(),reactRefresh()],
+  // Config for tailwind loading
   css: {
     postcss: {
       plugins: [
@@ -21,5 +22,6 @@ export default ({mode}: {mode: string}) => {
   },
   server: {
     port: process.env.NODE_ENV !== 'production' ? 5173 : 3000
-  }
+  },
+ 
 })}

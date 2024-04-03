@@ -100,7 +100,7 @@ beforeAll(() => {
   }));
 });
 
-let page: HTMLDivElement;
+let page: HTMLElement;
 
 beforeEach(async () => {
   render(<VideoList />);
