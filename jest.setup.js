@@ -1,11 +1,13 @@
 // jest.setup.js
+require('dotenv').config();
+
 // mock env
 jest.mock("vite", () => ({
   meta: {
     env: {
       VITE_BASE_URL: "http://localhost:5173",
       VITE_BASE_API: "http://localhost:3030",
-      VITE_WS: "ws://localhost:3031"
+      VITE_WS: "ws://localhost:3031",
     },
   },
 }));
@@ -27,6 +29,7 @@ const mockSocket = (connection) => {
       return event;
     },
     on: jest.fn(),
+    off: jest.fn(),
   };
 };
 
@@ -50,10 +53,12 @@ jest.mock("react-i18next", () => ({
 global = {
   io: mockSocket,
   useTranslation: () => ({ t: (key) => key }), // Mock implementation of useTranslation
-
   AppContext: {
     socket: {
       on: () => {
+        return () => jest.fn();
+      },
+      off: () => {
         return () => jest.fn();
       },
     },

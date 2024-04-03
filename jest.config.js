@@ -5,7 +5,6 @@ export default {
   setupFilesAfterEnv: ["@testing-library/jest-dom"],
   setupFiles: ["./jest.setup.js"],
   preset: "ts-jest/presets/default-esm",
-  transform: {},
   testPathIgnorePatterns: ["<rootDir>/src/config/*.ts"],
   transform: {
     '^.+\\ts$': 'babel-jest',

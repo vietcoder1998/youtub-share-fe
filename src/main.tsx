@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
         get: (_, prop) => import.meta.env[String(prop)],
       }
     ),
-  } as NodeJS.Process
+  } as NodeJS.Process;
 }
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

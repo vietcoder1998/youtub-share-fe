@@ -8,7 +8,7 @@ import { WrappingComponent } from "./Wrapping";
 import { Header } from "./components/Header";
 import { VITE_WS } from "../config/env";
 
-const ioWs: string = String(VITE_WS);
+const ioWs: string = String(VITE_WS ?? "ws://localhost:3031");
 const socket = io(ioWs);
 
 export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {

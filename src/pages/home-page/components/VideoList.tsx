@@ -4,6 +4,7 @@ import { DataList, UserInfo } from "../../../types/common";
 import { Video } from "../../../types/home-page";
 import { VideoItem } from "./VideoItem";
 import { AppContext } from "../../../contexts/AppContext";
+import { t } from "i18next";
 
 export type VideoItemData = {
   id: string;
@@ -33,14 +34,24 @@ export const VideoList: React.FC = () => {
 
   React.useEffect(() => {
     socket.on("newVideo", () => onLoadVideoList());
+
+    return () => {
+      socket.off("newVideo", () => {
+        console.info("off new video");
+      });
+    };
   }, []);
 
   React.useEffect(() => {}, []);
   return (
-    <div className="video-list" data-testid="video-list">
-      {youtubeList.map((item, index) => (
-        <VideoItem key={["video", index].join("-")} video={item} />
-      ))}
+    <div className="video-list py-2" data-testid="video-list">
+      {youtubeList.length ? (
+        youtubeList.map((item, index) => (
+          <VideoItem key={["video", index].join("-")} video={item} />
+        ))
+      ) : (
+        <label>{t("common.ui.noItemFound")}</label>
+      )}
     </div>
   );
 };

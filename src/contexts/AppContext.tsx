@@ -23,7 +23,14 @@ export const DefaultContextValue: AppContextType = {
   isLogin: false,
   socket: {
     on: (name, callback) => {
-      callback(name)
+      if (callback) {
+        callback(name)
+      }
+    },
+    off: (name, callback) => {
+      if (callback) {
+        callback(name)
+      }
     }
   } as Socket,
 };

@@ -3,7 +3,8 @@
         "ui": {
             "loginHeader": "Login Form",
             "submit": "Submit",
-            "backToHome": "Back to Home"
+            "backToHome": "Back to Home",
+            "noItemFound": "No item founded"
         },
         "header": {
             "youtubeShare": "Share a movie",
@@ -68,6 +69,9 @@
         },
         "title": {
             "youtubeUrl": "Youtube URL: "
+        },
+        "common": {
+            "shareLinkPlaceholder": "Share a Youtube embedded video"
         }
     }
 }
