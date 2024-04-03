@@ -3,14 +3,13 @@ import { CookieVariable, ModelName } from "../config/constants";
 import CookieHelper from "../helpers/cookie.helper";
 import { QueryList } from "../types/common";
 
-
 class BaseApi {
     public instance =  axios.create({
         headers: {
             token: `Bearer ${new CookieHelper().getCookie(CookieVariable.userToken)}`,
             'Funny-Movie-User-Id': new CookieHelper().getCookie(CookieVariable.userId)
         },
-        baseURL: typeof process !== 'undefined' ? process.env.VITE_APP_BASE_API : 'http://localhost:3030/api/v1',
+        baseURL: typeof process !== 'undefined' ? process.env.VITE_BASE_API : 'http://localhost:3030/api/v1',
     }) 
     name: ModelName | string = ''
 
