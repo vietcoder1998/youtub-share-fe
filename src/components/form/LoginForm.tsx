@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthenticateHelper from "../../helpers/authenticate.helper";
 import { RequestStatus } from "../../types/common.d";
+import { AppContext } from "../../contexts/AppContext";
 export type LoginFormType = {
   email: string;
   password: string;
@@ -33,11 +34,7 @@ export const LoginForm: React.FC<LoginFormProps> = (props: LoginFormProps) => {
       .then(() => {
         toast.success("Login successfully");
 
-        if (window.location.pathname === "/") {
-          window.location.reload();
-        } else {
-          navigate("/");
-        }
+        window.location.reload();
       })
       .catch((error) => {
         if (error) {

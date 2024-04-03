@@ -2,7 +2,7 @@
     "common": {
         "ui": {
             "loginHeader": "Login Form",
-            "submit": "Submit",
+            "submit": "Login/Register",
             "backToHome": "Back to Home",
             "noItemFound": "No item founded"
         },
