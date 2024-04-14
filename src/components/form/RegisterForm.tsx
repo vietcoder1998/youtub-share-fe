@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import AuthenticateHelper from "../../helpers/authenticate.helper";
-import { RequestStatus, UserInfo } from "../../types/common.d";
+import { RequestStatus, UserInfo } from "../../types/common";
 export type RegisterFormType = {
   email: string;
   password: string;

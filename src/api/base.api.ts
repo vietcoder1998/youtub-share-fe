@@ -5,13 +5,13 @@ import { QueryList } from "../types/common";
 import { VITE_WS } from "../config/env";
 
 class BaseApi {
-    public  instance = axios.create({
+    public get instance() { return axios.create({
         headers: {
             token: `Bearer ${new CookieHelper().getCookie(CookieVariable.userToken)}`,
             'Funny-Movie-User-Id': new CookieHelper().getCookie(CookieVariable.userId)
         },
         baseURL: VITE_WS ?? 'http://localhost:3030/api/v1',
-    })
+    }) }
     name: ModelName | string = ''
 
     constructor(name?: ModelName) {

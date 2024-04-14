@@ -3,13 +3,9 @@ import React from "react";
 import { io } from "socket.io-client";
 import { AppContext } from "../contexts/AppContext";
 import AuthenticateHelper from "../helpers/authenticate.helper";
-import { HeaderProps } from "../types/common.d";
+import { HeaderProps } from "../types/common";
 import { WrappingComponent } from "./Wrapping";
 import { Header } from "./components/Header";
-import { VITE_WS } from "../config/env";
-
-const ioWs: string = String(VITE_WS ?? "ws://localhost:3031");
-const socket = io(ioWs);
 
 export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
   children: JSX.Element;
@@ -23,6 +19,9 @@ export const DefaultLayout: React.FC<{ children: JSX.Element }> = (props: {
     },
   });
   const [isLogin, setIsLogin] = React.useState<boolean>(false);
+  const ioWs: string = String(process.env.VITE_WS);
+  const socket = io(ioWs);
+
   React.useEffect(() => {
     socket.on("connection", () => {
       console.log("Connection established");

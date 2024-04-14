@@ -1,7 +1,7 @@
 import { act, render, screen, waitFor } from "@testing-library/react";
 import { VideoListMock } from "../../../../__mock__/video.ts";
 import { VideoApi } from "../../../../api/video.api.ts";
-import { VideoList } from "../../../../pages/home-page/components/VideoList"; // Import the component you want to test
+import { VideoList } from "../../../../pages/home-page/components/VideoList.tsx"; // Import the component you want to test
 
 const mockApiGet = () => {
   jest.mock("axios")

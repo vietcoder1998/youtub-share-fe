@@ -1,6 +1,6 @@
-import { DetailResponse, UserInfo } from '../types/common.d';
+import { DetailResponse, UserInfo } from '../types/common';
 import { RegisterData } from '../types/register';
-import { ModelName } from './../config/constants';
+import { ModelName } from '../config/constants';
 import BaseApi from './base.api';
 
 export class AuthenticateApi extends BaseApi {

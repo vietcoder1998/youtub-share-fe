@@ -1,7 +1,7 @@
 import { AxiosRequestConfig } from 'axios';
 import BaseApi from "../api/base.api";
 import { ModelName } from "../config/constants";
-import { DataListResponse, DetailResponse } from './../types/common.d';
+import { DataListResponse, DetailResponse } from '../types/common';
 
 
 export class StorageItem<T>{
