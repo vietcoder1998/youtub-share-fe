@@ -1,5 +1,3 @@
-//
-console.log(`load env`, process.env)
 
 // eslint-disable-file no-use-before-define 
 export const VITE_BASE_API =  typeof process !=='undefined' ? process.env.VITE_BASE_API: undefined
